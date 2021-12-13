@@ -8,7 +8,7 @@
     <div class="card-container card-container--list">
       <button
         *ngFor="let post of posts"
-        [routerLink]="['/post', post.id]"
+        [routerLink]="['/post', post.slug]"
         class="card card-small"
       >
         <span>{{ post.title }}</span>

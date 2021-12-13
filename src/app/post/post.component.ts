@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { postsMock } from '../data/posts.mock';
 import { Post } from '../models/post.interface';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-post',
@@ -9,11 +10,23 @@ import { Post } from '../models/post.interface';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
-  posts: Post[] = postsMock
+  posts: Array<Post>;
   post?: Post;
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private postService : PostService) {
+    this.posts = new Array<Post>();
+  }
 
   ngOnInit(): void {
-    //this.post = postsMock.find((post) => post.id === +this.route.snapshot.params['id']);
+
+    this.postService.getPosts().subscribe(
+      (response: Array<Post>) => {
+          this.posts = response;
+          this.post = this.posts.find(x=>x.slug == this.route.snapshot.paramMap.get('slug'));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
   }
 }

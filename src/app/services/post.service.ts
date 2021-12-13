@@ -22,4 +22,30 @@ export class PostService {
 
     return res.asObservable();
   }
+
+
+
+  getPost(slug: any): Observable<any> {
+    let res = new Subject<object>();
+
+    const params = new HttpParams().set('slug', slug);
+
+    this.http
+      .get<any>(
+        'http://localhost:3001/post/'+slug,
+      )
+      .subscribe(
+        (response) => {
+          res.next(response);
+        },
+        (error) => {
+          res.error(error);
+        }
+      );
+
+    return res.asObservable();
+  }
 }
+
+
+
