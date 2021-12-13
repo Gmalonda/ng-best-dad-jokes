@@ -64,7 +64,7 @@
   <h2>BEST DAD jokes</h2>
   <p>They are so BAD an so FUNNY!</p>
 
-  <div class="card-container">
+  <div class="card-container" *ngIf="!isSpinner">
     <a
       *ngFor="let post of posts"
       [routerLink]="['/post', post.id]"
@@ -72,5 +72,8 @@
     >
       <span>{{ post.title }}</span>
     </a>
+  </div>
+  <div *ngElse>
+    <h1>Chargement en cours</h1>
   </div>
 </div>

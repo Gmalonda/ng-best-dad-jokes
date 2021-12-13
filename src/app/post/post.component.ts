@@ -14,6 +14,6 @@ export class PostComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.post = postsMock.find((post) => post.id === +this.route.snapshot.params['id']);
+    //this.post = postsMock.find((post) => post.id === +this.route.snapshot.params['id']);
   }
 }
